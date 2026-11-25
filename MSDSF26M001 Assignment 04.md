@@ -1,7 +1,7 @@
 # Assignment 4: Deploying, Load Balancing and Autoscaling a Web Application with MongoDB on Kubernetes
 
 **Roll No:** MSDSF26M001
-**Git repository:** <paste repo link here>
+**Git repository:** https://github.com/faran1512/emi-k8s-assignment4.git
 
 ---
 

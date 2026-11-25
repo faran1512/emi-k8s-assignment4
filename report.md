@@ -1,9 +1,8 @@
 # Assignment 4 – Deploying, Load Balancing and Autoscaling a Web Application with MongoDB on Kubernetes
 
-**Course:** DS-584 Cloud Computing, Fall 2026
-**Name:** <your name>  **Roll No:** MSDSF26M001
+**Name:** Faran Abdullah  **Roll No:** MSDSF26M001
 
-Git repository: <repo link>
+Git repository: https://github.com/faran1512/emi-k8s-assignment4.git
 
 ---
 

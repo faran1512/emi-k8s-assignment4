@@ -1,0 +1,9 @@
+=== documents BEFORE deleting mongo-1 ===
+4
+=== mongo-1 pod and its PVC BEFORE ===
+NAME      READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+mongo-1   1/1     Running   0          7m10s   10.244.0.13   minikube   <none>           <none>
+NAME           STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+data-mongo-1   Bound    pvc-24f07e0b-37c7-4e85-b1f1-1cbc3078e101   1Gi        RWO            standard       <unset>                 7m10s
+=== deleting mongo-1 ===
+pod "mongo-1" deleted from emi namespace

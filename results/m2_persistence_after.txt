@@ -1,0 +1,8 @@
+=== mongo-1 AFTER re-creation (same name, same PVC, fresh age) ===
+pod/mongo-1 condition met
+NAME      READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+mongo-1   1/1     Running   0          29s   10.244.0.18   minikube   <none>           <none>
+NAME           STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+data-mongo-1   Bound    pvc-24f07e0b-37c7-4e85-b1f1-1cbc3078e101   1Gi        RWO            standard       <unset>                 7m56s
+=== documents AFTER (no data loss) ===
+4

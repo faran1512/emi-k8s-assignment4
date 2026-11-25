@@ -1,0 +1,6 @@
+NAME                       READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+emi-web-5bd4d99c8c-929jb   1/1     Running   0          6s      10.244.0.19   minikube   <none>           <none>
+emi-web-5bd4d99c8c-cdtrw   1/1     Running   0          2m58s   10.244.0.15   minikube   <none>           <none>
+emi-web-5bd4d99c8c-fdgc6   1/1     Running   0          2m58s   10.244.0.17   minikube   <none>           <none>
+emi-web-5bd4d99c8c-tvdtm   1/1     Running   0          6s      10.244.0.20   minikube   <none>           <none>
+emi-web-5bd4d99c8c-xc57w   1/1     Running   0          2m58s   10.244.0.16   minikube   <none>           <none>

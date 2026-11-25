@@ -1,0 +1,25 @@
+=== watch output (mongo pods) ===
+NAME      READY   STATUS    RESTARTS   AGE
+mongo-0   1/1     Running   0          17m
+mongo-1   1/1     Running   0          2m44s
+mongo-2   1/1     Running   0          10m
+mongo-0   1/1     Terminating   0          17m
+mongo-0   1/1     Terminating   0          17m
+mongo-0   0/1     Completed     0          17m
+mongo-0   0/1     Completed     0          17m
+mongo-0   0/1     Completed     0          17m
+mongo-0   0/1     Pending       0          0s
+mongo-0   0/1     Pending       0          0s
+mongo-0   0/1     ContainerCreating   0          0s
+mongo-0   0/1     ContainerCreating   0          0s
+mongo-0   1/1     Running             0          0s
+
+=== rs.status() after failover ===
+mongo-0.mongo:27017 - SECONDARY
+mongo-1.mongo:27017 - PRIMARY
+mongo-2.mongo:27017 - SECONDARY
+
+=== app still saves (POST through ingress) ===
+{"emi":8008.24,"totalPayment":288296.55,"totalInterest":38296.55,"servedBy":"emi-web-5bd4d99c8c-tvdtm"}
+=== document count now ===
+135

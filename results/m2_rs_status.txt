@@ -1,0 +1,10 @@
+{ ok: 1 }
+Replica set rs0 is ready:
+mongo-0.mongo:27017 SECONDARY
+mongo-1.mongo:27017 STARTUP
+mongo-2.mongo:27017 STARTUP
+
+--- rs.status() (trimmed) ---
+mongo-0.mongo:27017 - PRIMARY
+mongo-1.mongo:27017 - SECONDARY
+mongo-2.mongo:27017 - SECONDARY

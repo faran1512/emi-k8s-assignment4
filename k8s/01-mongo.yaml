@@ -1,0 +1,80 @@
+# MongoDB replica set: headless Service + StatefulSet (3 members) + init Job
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+  namespace: emi
+spec:
+  clusterIP: None        # headless service -> stable DNS names like mongo-0.mongo
+  selector:
+    app: mongo
+  ports:
+    - port: 27017
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+  namespace: emi
+spec:
+  serviceName: mongo
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:7.0
+          args: ["--replSet", "rs0", "--bind_ip_all"]
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: data
+              mountPath: /data/db
+  # each pod gets its own 1Gi persistent volume
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongo-init
+  namespace: emi
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: mongo-init
+          image: mongo:7.0
+          # wait for mongo-0, then initiate the replica set (idempotent)
+          command: ["sh", "-c"]
+          args:
+            - |
+              until mongosh --host mongo-0.mongo:27017 --quiet --eval '
+                try {
+                  if (rs.status().ok) { quit(0); }
+                } catch (e) {
+                  rs.initiate({ _id: "rs0", members: [
+                    { _id: 0, host: "mongo-0.mongo:27017" },
+                    { _id: 1, host: "mongo-1.mongo:27017" },
+                    { _id: 2, host: "mongo-2.mongo:27017" }
+                  ]});
+                }'; do
+                echo "waiting for mongod..."; sleep 5;
+              done
+              echo "Replica set rs0 is ready:"
+              mongosh --host mongo-0.mongo:27017 --quiet --eval 'rs.status().members.forEach(m => print(m.name, m.stateStr))'
